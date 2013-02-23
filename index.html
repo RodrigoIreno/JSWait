@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<header>
+	<title>JSWait sample</title>
+	<script type="text/javascript" src="jswait.js"></script>
+	<script type="text/javascript">
+	
+		JSWait.createCycle(function(cycleDidFinish){
+			
+			console.log('cycle 1 start');
+			
+			JSWait.createCycle(function(cycleDidFinish){
+				
+				console.log('cycle 2 start');
+				
+				//waiting for..
+				setTimeout(function(){
+					//finish cycle 2
+					cycleDidFinish();
+				},3000);
+				
+			}, function(){
+				console.log('cycle 2 finish');
+				//and here finish cycle 1
+				//attention at the scope
+				cycleDidFinish();
+			});
+			
+		}, function(){
+			console.log('cycle 1 finish');
+		}, function(){
+			console.log('cycle 1 waiting');
+		}, 1);
+	
+	</script>
+</header>
+<body>
+</body>
+</html>
